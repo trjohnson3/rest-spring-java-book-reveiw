@@ -1,16 +1,13 @@
-package com.trj3.book_review.entity;
+package com.trj3.book_review.dto;
 
-import jakarta.persistence.*;
 
-@Entity
-@Table(name="USER_TABLE")
-public class UserEntity {
+import org.springframework.stereotype.Component;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@Component
+public class UserDTO {
+
     private Long id;
-
-    private String username;
+    private String userName;
     private String email;
     private String password;
 
@@ -22,12 +19,12 @@ public class UserEntity {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getEmail() {
