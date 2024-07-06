@@ -7,6 +7,7 @@ import com.trj3.book_review.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +44,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    @Transactional
     public BookDTO createBook(BookDTO theBookDTO) {
         BookEntity bookEntity = bookConverter.convertToEntity(theBookDTO);
         bookEntity = bookRepository.save(bookEntity);
@@ -52,11 +54,13 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    @Transactional
     public void deleteBook(Long theId) {
         bookRepository.deleteById(theId);
     }
 
     @Override
+    @Transactional
     public BookDTO updateBook(BookDTO theBookDTO, Long theId) {
         BookEntity bookEntity = bookConverter.convertToEntity(theBookDTO);
         bookEntity.setId(theId);
