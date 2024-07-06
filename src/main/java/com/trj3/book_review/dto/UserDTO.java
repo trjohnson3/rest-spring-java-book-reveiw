@@ -1,14 +1,22 @@
 package com.trj3.book_review.dto;
 
 
-import org.springframework.stereotype.Component;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
-@Component
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class UserDTO {
 
     private Long id;
+    @NotNull(message = "Username is a mandatory field.")
     private String userName;
+    @NotNull(message = "Email is a mandatory field.")
     private String email;
+    @NotNull(message = "Password is a mandatory field.")
+    @NotEmpty(message="Password cannot be empty string.")
     private String password;
 
     public Long getId() {

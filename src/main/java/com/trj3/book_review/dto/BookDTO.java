@@ -1,12 +1,14 @@
 package com.trj3.book_review.dto;
 
-import org.springframework.stereotype.Component;
+import jakarta.validation.constraints.NotNull;
 
-@Component
+
 public class BookDTO {
 
     private Long id;
+    @NotNull(message="Title cannot be null.")
     private String title;
+    @NotNull(message="Author cannot be null.")
     private String author;
 
     public Long getId() {
