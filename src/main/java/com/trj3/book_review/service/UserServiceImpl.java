@@ -7,6 +7,8 @@ import com.trj3.book_review.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -15,7 +17,6 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserConverter userConverter;
-
 
     @Override
     public UserDTO createUser(UserDTO theUserDTO) {
@@ -29,6 +30,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO login(String theEmail, String thePassword) {
-        return null;
+
+        Optional<UserEntity> myOptionalUserEntity = userRepository.findByEmailAndPassword(
+                theEmail, thePassword);
+        UserDTO myUserDTO = null;
+        if(myOptionalUserEntity.isPresent()) {
+            myUserDTO = userConverter.convertToDTO(myOptionalUserEntity.get());
+        }
+
+        return myUserDTO;
     }
 }
